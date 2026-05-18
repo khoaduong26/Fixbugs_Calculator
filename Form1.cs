@@ -36,8 +36,25 @@ namespace Buoi07_TinhToan3
         {
             //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
-            so1 = double.Parse(txtSo1.Text);
-            so2 = double.Parse(txtSo2.Text);
+            if (txtSo1.Text.Contains("/"))
+            {
+                string[] p = txtSo1.Text.Split('/');
+                so1 = double.Parse(p[0]) / double.Parse(p[1]);
+            }
+            else
+            {
+                so1 = double.Parse(txtSo1.Text);
+            }
+
+            if (txtSo2.Text.Contains("/"))
+            {
+                string[] p = txtSo2.Text.Split('/');
+                so2 = double.Parse(p[0]) / double.Parse(p[1]);
+            }
+            else
+            {
+                so2 = double.Parse(txtSo2.Text);
+            }
             //Thực hiện phép tính dựa vào phép toán được chọn
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
