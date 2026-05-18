@@ -71,7 +71,6 @@ namespace Buoi07_TinhToan3
 
                 kq = so1 / so2;
             }
-
             txtKq.Text = kq.ToString();
         }
     }
