@@ -36,24 +36,23 @@ namespace Buoi07_TinhToan3
         {
             //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
-            if (txtSo1.Text.Contains("/"))
+
+            // kiểm tra số 1
+            if (!double.TryParse(txtSo1.Text, out so1))
             {
-                string[] p = txtSo1.Text.Split('/');
-                so1 = double.Parse(p[0]) / double.Parse(p[1]);
-            }
-            else
-            {
-                so1 = double.Parse(txtSo1.Text);
+                MessageBox.Show("Số thứ nhất không hợp lệ! Chỉ được nhập số nguyên hoặc số thực.");
+                txtSo1.Focus();
+                txtSo1.SelectAll();
+                return;
             }
 
-            if (txtSo2.Text.Contains("/"))
+            // kiểm tra số 2
+            if (!double.TryParse(txtSo2.Text, out so2))
             {
-                string[] p = txtSo2.Text.Split('/');
-                so2 = double.Parse(p[0]) / double.Parse(p[1]);
-            }
-            else
-            {
-                so2 = double.Parse(txtSo2.Text);
+                MessageBox.Show("Số thứ không hợp lệ! Chỉ được nhập số nguyên hoặc số thực.");
+                txtSo2.Focus();
+                txtSo2.SelectAll();
+                return;
             }
             //Thực hiện phép tính dựa vào phép toán được chọn
             if (radCong.Checked) kq = so1 + so2;
