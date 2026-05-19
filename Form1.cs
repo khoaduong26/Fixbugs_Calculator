@@ -35,6 +35,29 @@ namespace Buoi07_TinhToan3
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtSo1.Text))
+            {
+                MessageBox.Show(
+                    "Không để trống số thứ 1",
+                    "Lỗi nhập liệu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtSo1.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtSo2.Text))
+            {
+                MessageBox.Show(
+                    "Không để trống số thứ 2",
+                    "Lỗi nhập liệu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtSo2.Focus();
+                return;
+            }
             double so1, so2, kq = 0;
 
             // Đổi dấu , thành . để hỗ trợ cả hai kiểu nhập
