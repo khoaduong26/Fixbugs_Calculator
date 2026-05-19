@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExtendedNumerics;
 
 namespace Buoi07_TinhToan3
 {
@@ -32,7 +33,20 @@ namespace Buoi07_TinhToan3
             if (dr == DialogResult.Yes)
                 this.Close();
         }
-
+        //Hàm kiểm tra nhập hợp lệ
+        private bool TryParseBigDecimal(string input, out BigDecimal result)
+        {
+            try
+            {
+                result = BigDecimal.Parse(input);
+                return true;
+            }
+            catch
+            {
+                result = 0;
+                return false;
+            }
+        }
         private void btnTinh_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtSo1.Text))
@@ -58,18 +72,16 @@ namespace Buoi07_TinhToan3
                 txtSo2.Focus();
                 return;
             }
-            double so1, so2, kq = 0;
+            //Đổi kiểu dữ liệu thành BigDecimal để hỗ trợ số rất lớn
+            BigDecimal so1, so2, kq = 0;
 
             // Đổi dấu , thành . để hỗ trợ cả hai kiểu nhập
             string input1 = txtSo1.Text.Replace(',', '.');
             string input2 = txtSo2.Text.Replace(',', '.');
 
             // Kiểm tra nhập hợp lệ
-            bool kt1 = double.TryParse(input1, NumberStyles.Any,
-                                       CultureInfo.InvariantCulture, out so1);
-
-            bool kt2 = double.TryParse(input2, NumberStyles.Any,
-                                       CultureInfo.InvariantCulture, out so2);
+            bool kt1 = TryParseBigDecimal(input1, out so1);
+            bool kt2 = TryParseBigDecimal(input2, out so2);
 
             if (!kt1 || !kt2)
             {
@@ -94,6 +106,7 @@ namespace Buoi07_TinhToan3
 
                 kq = so1 / so2;
             }
+
             txtKq.Text = kq.ToString();
         }
     }
